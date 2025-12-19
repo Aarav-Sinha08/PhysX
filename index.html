@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysX Lab | Aarav Sinha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        
+        :root {
+            --primary: #38bdf8;
+            --bg: #020617;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Glow */
+        .glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Entrance Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+
+        /* Icon Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .float-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Card Styling */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        /* Mobile specific fixes */
+        @media (max-width: 640px) {
+            .text-huge { font-size: 2.5rem; line-height: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="glow"></div>
+
+    <div class="max-w-4xl w-full">
+        
+        <header class="text-center mb-16 animate-in">
+            <span class="px-4 py-1.5 rounded-full border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest bg-blue-500/5">
+                v1.0 Physics Engine
+            </span>
+            <h1 class="text-huge text-5xl md:text-7xl font-bold mt-6 mb-4 tracking-tighter">
+                PhysX<span class="text-blue-500">Lab</span>
+            </h1>
+            <p class="text-slate-400 text-base md:text-xl font-light">
+                Interactive environments for the curious mind.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+            
+            <a href="LAPTOP/mul-lab.html" class="glass-card animate-in delay-1 p-8 rounded-3xl group">
+                <div class="mb-8 relative">
+                    <div class="w-16 h-16 bg-blue-500 rounded-2xl blur-2xl absolute opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="relative float-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v14M7 2h10" />
+                            <circle cx="12" cy="19" r="3" fill="rgba(56,189,248,0.2)" />
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Pendulum</h3>
+                <p class="text-slate-400 font-light leading-relaxed">
+                    A playground for harmonic motion, gravity adjustments, and phase-space visualization.
+                </p>
+                <div class="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-500">
+                    Enter Lab 
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7l5 5m0 0l-5 5m5-5H6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+            </a>
+
+            <div class="glass-card animate-in delay-2 p-8 rounded-3xl flex flex-col justify-center border-dashed border-white/10 opacity-60">
+                <div class="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center mb-6">
+                    <span class="text-white/20 text-2xl">+</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-500">Next Module</h3>
+                <p class="text-slate-600 text-sm mt-2 italic">Computing new simulations...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="mt-20 animate-in delay-2 text-center">
+        <div class="h-px w-12 bg-slate-800 mx-auto mb-6"></div>
+        <p class="text-[10px] tracking-[0.3em] uppercase text-slate-500 font-bold">
+            Curated by <span class="text-slate-300">Aarav Sinha</span>
+        </p>
+    </footer>
+
+</body>
+</html>
